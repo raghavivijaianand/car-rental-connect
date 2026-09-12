@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Car Booking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Book Your Car</h1>
+
+  <p id="carInfo"></p>
+
+  <form class="booking-form" action="save_booking.php" method="POST" onsubmit="return prepareBooking()">
+
+    <input type="text" id="name" name="name" placeholder="Enter Your Name" required>
+
+    <input type="tel" id="phone" name="phone" placeholder="Enter Mobile Number" required>
+
+    <label>Pickup Date</label>
+    <input type="date" id="pickupDate" name="pickup_date" required>
+
+    <label>Return Date</label>
+    <input type="date" id="returnDate" name="return_date" required>
+
+    <input type="text" id="pickup" name="pickup_location" placeholder="Pickup Location" required>
+
+    <input type="text" id="drop" name="drop_location" placeholder="Drop Location" required>
+
+    <input type="number" id="distance" name="distance" placeholder="Enter Distance in KM" required>
+
+    <input type="hidden" id="selectedCar" name="car">
+
+    <input type="hidden" id="totalAmount" name="total_amount">
+
+    <button type="button" onclick="calculatePrice()">Calculate Price</button>
+
+    <h2 id="total"></h2>
+
+    <button type="submit">Confirm Booking</button>
+
+  </form>
+
+  <script src="script.js"></script>
+
+  <script>
+    function prepareBooking() {
+      let distance = Number(document.getElementById("distance").value);
+
+      if (distance <= 0) {
+        alert("Please enter valid distance");
+        return false;
+      }
+
+      let total = 500 + (distance * perKmRate);
+
+      document.getElementById("selectedCar").value = carName;
+      document.getElementById("totalAmount").value = total;
+
+      return true;
+    }
+  </script>
+
+</body>
+</html>
